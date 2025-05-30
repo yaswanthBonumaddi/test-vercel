@@ -13,6 +13,5 @@
       }
     ],
     "buildCommand": "pnpm run build",
-    "installCommand": "pnpm install",
-    "outputDirectory": "dist"
-  }
+    "installCommand": "pnpm install"
+}

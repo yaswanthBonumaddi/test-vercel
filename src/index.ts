@@ -10,9 +10,16 @@ try {
 
 import Godspeed from "@godspeedsystems/core";
 
-// create a godspeed
-const gsApp = new Godspeed();
+let gsApp: any;
+let expressApp: any;
+let initialized = false;
 
-// initilize the Godspeed App
-// this is responsible to load all kind of entities
-gsApp.initialize();
+export default async function handler(req: any, res: any) {
+  if (!initialized) {
+    gsApp = new Godspeed();
+    await gsApp.initialize();
+    expressApp = gsApp.eventsources.http.client;
+    initialized = true;
+  }
+  return expressApp(req, res);
+}
