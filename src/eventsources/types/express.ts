@@ -20,9 +20,7 @@ export default class EventSource extends GSEventSource {
     
     this.setupMiddleware(app);
     this.setupAuthentication(app);
-    app.get('*', (req, res) => {
-        res.status(404).send('Not Found (from Express)');
-      });
+
     // Start the Express server (serverless compatible)
     if (!process.env.VERCEL && !process.env.SERVERLESS) {
       app.listen(port, () => {
@@ -36,6 +34,8 @@ export default class EventSource extends GSEventSource {
     if (process.env.OTEL_ENABLED === 'true') {
       this.setupMetrics(app);
     }
+
+    this.registerCatchAll404(app);
     return app;
   }
   setupMiddleware(app: express.Express) {
@@ -256,6 +256,11 @@ export default class EventSource extends GSEventSource {
       }
     });
     return Promise.resolve();
+  }
+  registerCatchAll404(app: express.Express) {
+    app.get('*', (req, res) => {
+      res.status(404).send('Not Found (from Express)');
+    });
   }
 }
 // Remove leading and trailing / (slash) if present
