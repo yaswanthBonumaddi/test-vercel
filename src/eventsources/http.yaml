@@ -25,6 +25,7 @@ docs:
     - url: 'http://localhost:3001'
       description: Internal API server
 
+
 request_body_limit: 20000   # set maximum size of the request body in bytes
 file_size_limit: 50000      # set max file upload size in bytes (default is 50 mb)
 
