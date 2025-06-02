@@ -20,9 +20,9 @@ docs:
       name: Apache 2.0
       url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
   servers:
-    - url: 'http://localhost:3000'
+    - url: 'https://test-vercel-brown-pi.vercel.app/'
       description: Public API server
-    - url: 'http://localhost:3001'
+    - url: 'https://test-vercel-brown-pi.vercel.app/'
       description: Internal API server
 
 
