@@ -17,10 +17,12 @@ export default class EventSource extends GSEventSource {
   async initClient(): Promise<PlainObject> {
     const app = express();
     const { port = 3000, docs = { endpoint: '/api-docs' } } = this.config;
-
+    
     this.setupMiddleware(app);
     this.setupAuthentication(app);
-
+    app.get('*', (req, res) => {
+        res.status(404).send('Not Found (from Express)');
+      });
     // Start the Express server (serverless compatible)
     if (!process.env.VERCEL && !process.env.SERVERLESS) {
       app.listen(port, () => {
