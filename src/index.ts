@@ -17,8 +17,8 @@ let initialized = false;
 export default async function handler(req: any, res: any) {
   if (!initialized) {
     gsApp = new Godspeed();
-    console.log("XXX",gsApp)
     await gsApp.initialize();
+    console.log("XXX",gsApp)
     expressApp = gsApp.eventsources.http.client;
     initialized = true;
   }
@@ -26,11 +26,10 @@ export default async function handler(req: any, res: any) {
 }
 
 // // Add this for local/serverful mode:
-// if (require.main === module) {
-//   (async () => {
-//     const gsApp = new Godspeed();
-//     console.log("XXX",gsApp)
-//     await gsApp.initialize();
-//     console.log("zzz",gsApp)
-//   })();
-// }
+if (require.main === module) {
+  (async () => {
+    const gsApp = new Godspeed();
+    await gsApp.initialize();
+    console.log("zzz",gsApp)
+  })();
+}

@@ -35,7 +35,6 @@ export default class EventSource extends GSEventSource {
       this.setupMetrics(app);
     }
 
-    this.registerCatchAll404(app);
     return app;
   }
   setupMiddleware(app: express.Express) {
@@ -256,11 +255,6 @@ export default class EventSource extends GSEventSource {
       }
     });
     return Promise.resolve();
-  }
-  registerCatchAll404(app: express.Express) {
-    app.get('*', (req, res) => {
-      res.status(404).send('Not Found (from Express)');
-    });
   }
 }
 // Remove leading and trailing / (slash) if present
