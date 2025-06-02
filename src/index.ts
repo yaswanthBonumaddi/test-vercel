@@ -25,12 +25,12 @@ export default async function handler(req: any, res: any) {
   return expressApp(req, res);
 }
 
-// Add this for local/serverful mode:
-if (require.main === module) {
-  (async () => {
-    const gsApp = new Godspeed();
-    console.log("XXX",gsApp)
-    await gsApp.initialize();
-    console.log("zzz",gsApp)
-  })();
-}
+// // Add this for local/serverful mode:
+// if (require.main === module) {
+//   (async () => {
+//     const gsApp = new Godspeed();
+//     console.log("XXX",gsApp)
+//     await gsApp.initialize();
+//     console.log("zzz",gsApp)
+//   })();
+// }
