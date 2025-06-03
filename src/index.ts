@@ -15,21 +15,36 @@ let expressApp: any;
 let initialized = false;
 
 export default async function handler(req: any, res: any) {
-  if (!initialized) {
-    gsApp = new Godspeed();
-    await gsApp.initialize();
-    console.log("XXX",gsApp)
-    expressApp = gsApp.eventsources.http.client;
-    initialized = true;
+  try {
+    if (!initialized) {
+      gsApp = new Godspeed();
+      await gsApp.initialize();
+      expressApp = gsApp.eventsources.http.client;
+      initialized = true;
+    }
+    return expressApp(req, res);
+  } catch (error) {
+    console.error('Function error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-  return expressApp(req, res);
 }
+
+// Export the Express app (http client) for advanced use cases
+export const app = expressApp;
 
 // // Add this for local/serverful mode:
 if (require.main === module) {
   (async () => {
     const gsApp = new Godspeed();
     await gsApp.initialize();
-    console.log("zzz",gsApp)
+    const app = gsApp.eventsources.http.client;
+    const port = process.env.PORT || 3000;
+    if (app && typeof app.listen === 'function') {
+      app.listen(port, () => {
+        console.log(`Server running on http://localhost:${port}`);
+      });
+    } else {
+      console.error('Express app instance not found or does not have a listen method.');
+    }
   })();
 }
