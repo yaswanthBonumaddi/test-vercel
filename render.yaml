@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: godspeed-app
+    env: node
+    plan: free
+    branch: main
+    rootDir: .
+    buildCommand: pnpm install && pnpm run build
+    startCommand: node dist/index.js
+    autoDeploy: true
+    envVars:
+      - key: POSTGRES_URL
+        value: postgresql://postgres:postgres@172.23.0.2:5432/emp
+      - key: MONGO_TEST_URL
+        value: mongodb://username:password@mongodb1,mongodb2,mongodb3:27017/test?replicaSet=gs_service
+      - key: GS_TRANSPILE
+        value: "true"
