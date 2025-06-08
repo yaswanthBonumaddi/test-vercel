@@ -38,7 +38,7 @@ if (require.main === module) {
     const gsApp = new Godspeed();
     await gsApp.initialize();
     const app = gsApp.eventsources.http.client;
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 3002;
     if (app && typeof app.listen === 'function') {
       app.listen(port, () => {
         console.log(`Server running on http://localhost:${port}`);

@@ -9,9 +9,12 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/dist/index.js"
+      "dest": "/dist"
     }
   ],
+  "env": {
+    "SUPPRESS_NO_CONFIG_WARNING": "true"
+  },
   "buildCommand": "pnpm run build",
   "installCommand": "pnpm install",
   "outputDirectory": "dist"
